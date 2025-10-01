@@ -32,17 +32,19 @@ their content, and receive notifications about domain events.
 
 ---
 
-## Service scope — IAM-Service
+## Service scope — Utils-Service
 
-* **Auth**: registration, login, logout, refresh tokens, password recovery.
-* **RBAC**: roles `USER`, `ADMIN`, `SUPER_ADMIN` with method/endpoint protection.
-* **Content**: Posts & Comments CRUD with validation, pagination/sorting/filtering (Specification/Criteria).
-* **Events**: publishes Kafka messages on CRUD operations:
+* **Kafka consumer**: subscribes to domain topics produced by `iam-service`:
     - `user.created`, `user.updated`, `user.deleted`
     - `post.created`, `post.updated`, `post.deleted`
     - `comment.created`, `comment.updated`, `comment.deleted`
-* **Discovery**: registers in Consul; exposes health via Actuator.
-* **API docs**: Swagger/OpenAPI
+* **Notifications**
+    - Persist notifications in PostgreSQL (via JPA).
+    - REST endpoints for listing/fetching with pagination/sorting/filtering.
+    - Operations: **mark as read** / **mark as unread** (`is_read` flag).
+* **Security**: validates JWT (issued by `iam-service`) for protected endpoints.
+* **Discovery/Health**: registers in **Consul**, exposes **Actuator** endpoints.
+* **API docs**: Swagger/OpenAPI.
 
 ---
 
@@ -115,7 +117,7 @@ Minimal example:
 
 ```bash
 docker run -d --restart unless-stopped \
-  --name iam-service \
+  --name utils-service \
   -p 8185:8185 \
   --network app-network \
   -e PROFILE=prod \
@@ -126,7 +128,7 @@ docker run -d --restart unless-stopped \
   -e DB_PASSWORD=secret \
   -e KAFKA_HOST=kafka \
   -e CONSUL_HOST=consul \
-  post-hub/iam-service:latest
+  post-hub/utils-service:latest
 ```
 
 ---

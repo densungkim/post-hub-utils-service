@@ -87,7 +87,7 @@ docker compose up -d
 mvn spring-boot:run
 ```
 
-### B) Local Docker (default profile: [local](src/main/resources/application-local.properties)
+### B) Local Docker (profile: [local](src/main/resources/application-local.properties))
 
 This repo includes [utils-service.sh](docker/utils-service.sh) (entrypoint) and [Dockerfile](docker/Dockerfile).
 
@@ -102,7 +102,7 @@ docker build -f docker/Dockerfile -t post-hub/utils-service .
 docker run -d --name utils-service --network app-network -p 8185:8185 post-hub/utils-service
 ```
 
-### C) Production — Docker
+### C) Production — Docker (profile: [prod](src/main/resources/application-prod.properties))
 
 For production you must provide environment variables:
 

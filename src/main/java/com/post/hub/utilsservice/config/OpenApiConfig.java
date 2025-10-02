@@ -21,7 +21,14 @@ import java.util.Date;
         info = @Info(
                 title = "POST_HUB REST API",
                 version = "1.0",
-                description = "UTILS-service REST API"
+                description = """
+                        UTILS-service REST API
+
+                        To use this API, you must include a valid JWT token in the Authorization header.
+                        JWT tokens are issued by the IAM Service.
+
+                        Please obtain a token from the IAM Service first, then use it to access the Utils Service endpoints.
+                        """
         ),
         security = {@SecurityRequirement(name = HttpHeaders.AUTHORIZATION)}
 )

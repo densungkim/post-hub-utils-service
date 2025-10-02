@@ -112,6 +112,7 @@ For production you must provide environment variables:
 - DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD
 - KAFKA_HOST
 - CONSUL_HOST
+- SERVER_IP
 
 Minimal example:
 
@@ -128,6 +129,7 @@ docker run -d --restart unless-stopped \
   -e DB_PASSWORD=secret \
   -e KAFKA_HOST=kafka \
   -e CONSUL_HOST=consul \
+  -e SERVER_IP=your.host.ip \
   post-hub/utils-service:latest
 ```
 

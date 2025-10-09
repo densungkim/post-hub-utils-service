@@ -97,7 +97,7 @@ jobs:
         id: meta
         run: |
           set -Eeuo pipefail
-          SAFE=$(echo "$RAW" \
+          SAFE=$(echo "$GITHUB_REF_NAME" \
             | tr '[:upper:]' '[:lower:]' \
             | sed -E 's#[^a-z0-9._-]+#-#g' \
             | sed -E 's/^-+|-+$//g' \
@@ -136,7 +136,7 @@ jobs:
       - name: Compute image tag (same formula as build)
         run: |
           set -Eeuo pipefail
-          SAFE=$(echo "$RAW" \
+          SAFE=$(echo "$GITHUB_REF_NAME" \
             | tr '[:upper:]' '[:lower:]' \
             | sed -E 's#[^a-z0-9._-]+#-#g' \
             | sed -E 's/^-+|-+$//g' \

@@ -7,7 +7,6 @@ import com.post.hub.utilsservice.model.request.ActionLogIsReadRequest;
 import com.post.hub.utilsservice.model.response.ActionLogUpdateResultDTO;
 import com.post.hub.utilsservice.model.response.PaginationResponse;
 import com.post.hub.utilsservice.model.response.UtilsResponse;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Pageable;
 
 public interface ActionLogService {
@@ -16,7 +15,7 @@ public interface ActionLogService {
 
     UtilsResponse<PaginationResponse<ActionLogDTO>> findAllActionLogs(Pageable pageable);
 
-    UtilsResponse<ActionLogUpdateResultDTO> setIsReadEqualsTrue(@NotNull ActionLogIsReadRequest request);
+    UtilsResponse<ActionLogUpdateResultDTO> setIsReadEqualsTrue(ActionLogIsReadRequest request);
 
     ActionLog saveLogFromKafkaMessage(UtilMessage message);
 

@@ -1,6 +1,5 @@
 package com.post.hub.utilsservice.advice;
 
-import com.post.hub.utilsservice.model.constant.ApiConstants;
 import com.post.hub.utilsservice.model.constant.ApiErrorMessage;
 import com.post.hub.utilsservice.model.exception.AuthException;
 import com.post.hub.utilsservice.model.exception.BadRequestException;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.AccessDeniedException;
 import java.time.zone.ZoneRulesException;
-import java.util.Arrays;
-import java.util.Objects;
 
 @Slf4j
 @ControllerAdvice(annotations = RestController.class)
@@ -87,28 +84,7 @@ public class CommonControllerAdvice {
     }
 
     private void logStackTrace(Exception ex) {
-        StringBuilder stackTrace = new StringBuilder();
-
-        stackTrace.append(ApiConstants.ANSI_RED);
-
-        stackTrace.append(ex.getMessage()).append(ApiConstants.BREAK_LINE);
-
-        if (Objects.nonNull(ex.getCause())) {
-            stackTrace.append(ex.getCause().getMessage()).append(ApiConstants.BREAK_LINE);
-        }
-
-        Arrays.stream(ex.getStackTrace())
-                .filter(st -> st.getClassName().startsWith(ApiConstants.TIME_ZONE_PACKAGE_NAME))
-                .forEach(st -> stackTrace
-                        .append(st.getClassName())
-                        .append(".")
-                        .append(st.getMethodName())
-                        .append(" (")
-                        .append(st.getLineNumber())
-                        .append(") ")
-                );
-
-        log.error(stackTrace.append(ApiConstants.ANSI_WHITE).toString());
+        log.error("Unhandled exception captured by controller advice", ex);
     }
 
 }

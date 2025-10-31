@@ -12,7 +12,6 @@ import com.post.hub.utilsservice.model.response.PaginationResponse;
 import com.post.hub.utilsservice.model.response.UtilsResponse;
 import com.post.hub.utilsservice.repository.ActionLogRepository;
 import com.post.hub.utilsservice.service.ActionLogService;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -63,7 +62,7 @@ public class ActionLogServiceImpl implements ActionLogService {
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public UtilsResponse<ActionLogUpdateResultDTO> setIsReadEqualsTrue(@NotNull ActionLogIsReadRequest request) {
+    public UtilsResponse<ActionLogUpdateResultDTO> setIsReadEqualsTrue(ActionLogIsReadRequest request) {
         Integer currentUserId = request.getUserId();
 
         List<ActionLog> logs = repository.findAllById(request.getIds());

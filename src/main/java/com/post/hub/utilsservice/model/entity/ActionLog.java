@@ -7,7 +7,6 @@ import com.post.hub.utilsservice.utils.enums.converter.PostHubServiceConverter;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +14,6 @@ import java.time.LocalDateTime;
 @Table(name = "action_logs")
 @Getter
 @Setter
-@ToString
 public class ActionLog {
 
     @Id

@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ActionLogIsReadRequest {
 
-    @NotNull
+    @NotNull(message = "'userId' cannot be null")
     private Integer userId;
 
     @NotEmpty(message = "'ids' cannot be empty")

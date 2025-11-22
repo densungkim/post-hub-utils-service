@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 public final class ApiUtils {
 
     public static String getMethodName() {
-        try {
-            return new Throwable().getStackTrace()[1].getMethodName();
-        } catch (Exception cause) {
-            return ApiConstants.UNDEFINED;
-        }
+        return StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
+                .walk(frames -> frames.skip(1)
+                        .findFirst()
+                        .map(StackWalker.StackFrame::getMethodName)
+                        .orElse(ApiConstants.UNDEFINED));
     }
 
 }

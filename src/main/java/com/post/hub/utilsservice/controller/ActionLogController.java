@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("${endpoints.action.logs}")
+@RequestMapping("/action-logs")
 @RequiredArgsConstructor
 public class ActionLogController {
     private final ActionLogService service;
 
-    @PutMapping("${endpoints.id}")
+    @PutMapping("/{id}")
     public ResponseEntity<UtilsResponse<ActionLogUpdateResultDTO>> setIsReadEqualsTrue(
             @RequestBody @Valid ActionLogIsReadRequest request
     ) {
@@ -32,7 +32,7 @@ public class ActionLogController {
         return ResponseEntity.ok(service.setIsReadEqualsTrue(request));
     }
 
-    @GetMapping("${endpoints.id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UtilsResponse<ActionLogDTO>> getActionLogById(
             @PathVariable(name = "id") Integer logId,
             @RequestParam(name = "userId", required = false) Integer userId
